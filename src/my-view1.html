@@ -48,8 +48,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 <link rel="import" href="../bower_components/promise-polyfill/promise-polyfill-lite.html">
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<!-- <link rel="import" href="../bower_components/polymer/polymer.html"> -->
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="shared-styles.html">
@@ -69,12 +69,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       auto
       url="../data/book.json"
       handle-as="json"
-      last-response="{{response}}"></iron-ajax>
+      last-response="{{response}}"
+      >
+    </iron-ajax>
 
       <div class="card">
         <div class="circle">1</div>
         <iron-image src="../images/cover.jpg"></iron-image>
         <template id="dom-repeat" items="{{response}}">
+          {{console.log(resonse)}}
           <style include="shared-styles">
             :host {
               display: block;
@@ -99,3 +102,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     window.customElements.define(MyView1.is, MyView1);
   </script>
 </dom-module>
+<!-- n.b : include handleResponse in iron-ajax request -->
+    <!-- <script>
+        Polymer({
+            is: 'my-view1',
+            properties: {
+                book: {
+                    type: Object
+                }
+            },
+            ready: function () {
+                this.$.requestBook.generateRequest();
+            },
+            handleResponse: function (data) {
+                this.book = data.response;
+            }
+        });
+    </script> -->

@@ -1,3 +1,83 @@
+<link rel="import" href="../bower_components/promise-polyfill/promise-polyfill-lite.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<!-- <link rel="import" href="../bower_components/polymer/polymer.html"> -->
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view1">
+
+    <template>
+      <style include="shared-styles">
+        :host {
+          display: block;
+
+          padding: 10px;
+        }
+      </style>
+<!-- IRON-AJAX HERE -->
+      <iron-ajax
+      auto
+      url="../data/book.json"
+      handle-as="json"
+      last-response="{{response}}"
+      >
+    </iron-ajax>
+
+      <div class="card">
+        <div class="circle">1</div>
+        <!-- IRON IMAGE -->
+        <iron-image src="../images/cover.jpg"></iron-image>
+        <template id="dom-repeat" items="{{response}}">
+          <style include="shared-styles">
+            :host {
+              display: block;
+
+              padding: 10px;
+            }
+          </style>
+          <h1>{{item.title}}</h1>
+        </template>
+        <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
+        <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      </div>
+    </template>
+
+
+  <script>
+
+    class MyView1 extends Polymer.Element {
+      static get is() { return 'my-view1'; }
+    }
+
+    window.customElements.define(MyView1.is, MyView1);
+  </script>
+</dom-module>
+<!-- n.b : include handleResponse in iron-ajax request -->
+    <!-- <script>
+        Polymer({
+            is: 'my-view1',
+            properties: {
+                book: {
+                    type: Object
+                }
+            },
+            ready: function () {
+                this.$.requestBook.generateRequest();
+            },
+            handleResponse: function (data) {
+                this.book = data.response;
+            }
+        });
+    </script> -->
+
+
+
+
+
+
+
+
 <!--
 @license
 Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
@@ -44,77 +124,3 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     window.customElements.define(MyView1.is, MyView1);
   </script>
 </dom-module> -->
-
-
-
-<link rel="import" href="../bower_components/promise-polyfill/promise-polyfill-lite.html">
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<!-- <link rel="import" href="../bower_components/polymer/polymer.html"> -->
-<link rel="import" href="../bower_components/iron-image/iron-image.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="shared-styles.html">
-
-<dom-module id="my-view1">
-
-    <template>
-      <style include="shared-styles">
-        :host {
-          display: block;
-
-          padding: 10px;
-        }
-      </style>
-
-      <iron-ajax
-      auto
-      url="../data/book.json"
-      handle-as="json"
-      last-response="{{response}}"
-      >
-    </iron-ajax>
-
-      <div class="card">
-        <div class="circle">1</div>
-        <iron-image src="../images/cover.jpg"></iron-image>
-        <template id="dom-repeat" items="{{response}}">
-          <style include="shared-styles">
-            :host {
-              display: block;
-
-              padding: 10px;
-            }
-          </style>
-          <h1>{{item.title}}</h1>
-        </template>
-        <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-        <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
-      </div>
-    </template>
-
-
-  <script>
-
-    class MyView1 extends Polymer.Element {
-      static get is() { return 'my-view1'; }
-    }
-
-    window.customElements.define(MyView1.is, MyView1);
-  </script>
-</dom-module>
-<!-- n.b : include handleResponse in iron-ajax request -->
-    <!-- <script>
-        Polymer({
-            is: 'my-view1',
-            properties: {
-                book: {
-                    type: Object
-                }
-            },
-            ready: function () {
-                this.$.requestBook.generateRequest();
-            },
-            handleResponse: function (data) {
-                this.book = data.response;
-            }
-        });
-    </script> -->
